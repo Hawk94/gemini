@@ -48,6 +48,8 @@ INSTALLED_APPS += ['debug_toolbar', ]
 
 INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', ]
 
+ALLOWED_HOSTS = ['*']
+
 
 import socket
 import os
