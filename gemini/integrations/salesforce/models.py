@@ -32,7 +32,7 @@ class SalesforceQuery(models.Model):
         self.refresh_token()
         sf = Salesforce(instance=self.client.instance_url, session_id=self.client.access_token)
         return sf.query_all(query)
-    
+
     def refresh_token(self):
         client = OAuth2Session(self.credential.id_url,
                                token=self.credential.id_token,

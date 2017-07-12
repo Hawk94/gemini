@@ -77,11 +77,6 @@
       {% endif %}
 
       {% block content %}
-        <h5>Connect with Salesforce.</h5>
-        <form name="create_station" method="post" action="{% url 'salesforce:oauth' %}">
-            <input type="submit" value="Click Me" />
-            {% csrf_token %}
-        </form>
       {% endblock content %}
 
     </div> <!-- /container -->
