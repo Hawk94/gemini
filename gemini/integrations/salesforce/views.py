@@ -23,7 +23,16 @@ class SalesforceCallbackView(LoginRequiredMixin, View):
     redirect_field_name = 'salesforce:callback'
 
     def save_credentials(self, user, token):
-        SalesforceCredential.objects.create(user=user, access_token=token['access_token'])
+        SalesforceCredential.objects.create(user=user,
+                                            id_url = token['id'],
+                                            issued_at = token['issued_at'],
+                                            scope = token['scope'],
+                                            instance_url = token['instance_url'],
+                                            token_type = token['token_type'],
+                                            refresh_token = token['refresh_token'],
+                                            id_token = token['id_token'],
+                                            signature = token['signature'],
+                                            access_token = token['access_token'])
 
     def get(self, request, *args, **kwargs):
         oauth = OAuth2Session(client_id=settings.SALESFORCE_CONSUMER_KEY, state=request.session['oauth_state'])
