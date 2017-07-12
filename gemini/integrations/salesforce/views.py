@@ -12,7 +12,7 @@ class SalesforceAuthView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         callback_uri = settings.SALESFORCE_CALLBACK_URL
         auth_url = settings.SALESFORCE_BASE_URL + settings.SALESFORCE_AUTHORIZATION_URL
-        oauth = OAuth2Session(client_id=settings.SALESFORCE_CONSUMER_KEY, redirect_uri='toreda.co.uk')
+        oauth = OAuth2Session(client_id=settings.SALESFORCE_CONSUMER_KEY, redirect_uri='https://toreda.co.uk')
         authorization_url, state = oauth.authorization_url(auth_url)
         request.session['oauth_state'] = state
         return redirect(authorization_url)
@@ -21,7 +21,7 @@ class SalesforceAuthView(LoginRequiredMixin, View):
 class SalesforceCallbackView(LoginRequiredMixin, View):
     login_url = reverse_lazy('account_login')
     redirect_field_name = 'salesforce:callback'
-    
+
     def save_credentials(self, user, token):
         SalesforceCredential.objects.create(user=user, access_token=token['access_token'])
 
